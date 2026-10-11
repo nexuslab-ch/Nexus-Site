@@ -704,7 +704,7 @@
       var key = null, i, r;
       if (narrow.matches) {
         /* le premier exemple visible juste sous la maquette collée */
-        var under = mock.getBoundingClientRect().bottom + 8;
+        var mr = mock.getBoundingClientRect(), under = mr.bottom + 8;
         for (i = 0; i < tools.length; i++) {
           r = tools[i].getBoundingClientRect();
           if (r.bottom > under) { key = tools[i].dataset.tool; break; }
