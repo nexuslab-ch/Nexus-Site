@@ -423,7 +423,6 @@ def jsonld(c):
                 "description": c.meta["description"],
                 "slogan": c.brand["signature"],
                 "telephone": c.brand["phone_tel"],
-                "priceRange": "CHF 690+",
                 "areaServed": [
                     {"@type": "AdministrativeArea", "name": "Valais"},
                     {"@type": "AdministrativeArea", "name": "Suisse romande"},
@@ -481,7 +480,8 @@ def middle_sections(c):
             '<p class="offer-price"><span class="from">%s</span><span class="amount">%s</span>%s</p>'
             '<p class="offer-text">%s</p><ul class="offer-list">%s</ul></article>'
             % (cls, badge, esc(card["name"]), esc(c.offers["from"]), esc(card["price"]), period, esc(card["text"]), items))
-    H.append(
+    if getattr(c, "SHOW_OFFERS", True):
+      H.append(
         '<section class="section" id="offres" aria-labelledby="offres-title"><div class="container">'
         '<div class="split-head reveal"><div>%s<h2 id="offres-title">%s</h2></div><p class="lede">%s</p></div>'
         '<div class="grid-3">%s</div><p class="offers-note reveal">%s</p>'
