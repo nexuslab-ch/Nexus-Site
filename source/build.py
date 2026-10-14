@@ -485,9 +485,10 @@ def middle_sections(c):
         '<section class="section" id="offres" aria-labelledby="offres-title"><div class="container">'
         '<div class="split-head reveal"><div>%s<h2 id="offres-title">%s</h2></div><p class="lede">%s</p></div>'
         '<div class="grid-3">%s</div><p class="offers-note reveal">%s</p>'
+        '<p class="offers-cta reveal"><a class="btn btn-primary" href="#contact">%s</a></p>'
         '<div class="more reveal"><div><h3>%s</h3><p>%s</p></div><a class="btn btn-ghost" href="#outils">%s</a></div>'
         '</div></section>'
-        % (tag(c.offers["tag"]), esc(c.offers["title"]), esc(c.offers["intro"]), "".join(cards), esc(c.offers["note"]),
+        % (tag(c.offers["tag"]), esc(c.offers["title"]), esc(c.offers["intro"]), "".join(cards), esc(c.offers["note"]), esc(c.offers.get("cta", c.nav["cta"])),
            esc(c.offers["more_title"]), esc(c.offers["more_text"]), esc(c.offers["more_cta"])))
 
     # Outils sur mesure : exemples cliquables à gauche, maquette d'interface dessinée en code à droite.
@@ -656,7 +657,8 @@ def middle_sections(c):
     def row(label, metric, unit=""):
         return ('<div class="term-row"><span class="term-key">%s</span><span class="term-dots" aria-hidden="true"></span>'
                 '<span class="term-val"><b data-metric="%s">…</b>%s</span></div>' % (esc(label), metric, (" " + unit) if unit else ""))
-    H.append(
+    if getattr(c, "SHOW_PROOF", True):
+      H.append(
         '<section class="section proof" id="preuve" aria-labelledby="preuve-title" data-median-desktop="%s" data-median-mobile="%s">'
         '<div class="container proof-grid2"><div class="reveal">%s<h2 id="preuve-title">%s</h2><p class="lede">%s</p>'
         '<p class="compare-source"><a href="%s" rel="noopener" target="_blank">%s</a></p></div>'
