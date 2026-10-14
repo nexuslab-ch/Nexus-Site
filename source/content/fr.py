@@ -7,6 +7,9 @@ LANG = "fr"
 LOCALE = "fr_CH"
 PREFIX = ""  # racine du site pour le français
 
+# Section « Ce que pèse cette page » : retirée le 14.10.2026 pour alléger la page.
+SHOW_PROOF = False
+
 # Adresse e-mail NexusLab : formulaire, mentions légales, protection des données.
 CONTACT_EMAIL = "nexuslab.mpa@gmail.com"
 
@@ -14,7 +17,7 @@ NBSP = " "
 
 meta = {
     "title": "NexusLab, sites web et outils digitaux pour les PME de Suisse romande",
-    "description": "NexusLab crée des sites web simples et des outils digitaux pour les PME et les indépendants de Suisse romande. Une équipe basée en Valais, un seul client à la fois, une offre écrite avant de commencer. Formules à partir de CHF 690.",
+    "description": "NexusLab crée des sites web simples et des outils digitaux pour les PME et les indépendants de Suisse romande. Une équipe basée en Suisse, un devis écrit avant de commencer, un seul client à la fois. Formules à partir de CHF 690.",
     "og_title": "NexusLab, le lien entre votre métier et le digital",
     "og_description": "Sites web et outils digitaux pour les PME de Suisse romande. Un seul client à la fois, des prix clairs, une équipe que vous pouvez appeler.",
     "lang_label": "Français",
@@ -32,7 +35,7 @@ brand = {
     "form_email": CONTACT_EMAIL,
     "form_subject": "Nouveau message depuis nexus-lab.ch",
     "form_autoresponse": "Bonjour, nous avons bien reçu votre message et nous vous répondons rapidement, en général dans les 24 heures. À bientôt, l’équipe NexusLab.",
-    "region": "Valais, Suisse romande",
+    "region": "Suisse romande",
 }
 
 nav = {
@@ -46,7 +49,7 @@ nav = {
         ("#realisations", "Réalisations"),
         ("#contact", "Contact"),
     ],
-    "cta": "Parler de votre projet",
+    "cta": "Demander un devis",
     "lang_title": "Changer de langue",
 }
 
@@ -55,13 +58,13 @@ hero = {
     "title": "Le lien entre votre métier et le digital.",
     # Au survol, ce mot bascule en glitch vers le second : « Le nexus entre votre métier et le digital. »
     "title_glitch": ("lien", "nexus"),
-    "lede": "NexusLab crée des sites et des outils simples pour les PME et les indépendants de Suisse romande. Une équipe que vous pouvez appeler, un seul client à la fois, et une offre écrite avant de commencer.",
-    "cta_primary": "Parler de votre projet",
+    "lede": "Des sites et des outils simples pour les PME et les indépendants de Suisse romande. Décrivez votre projet, vous recevez un devis écrit.",
+    "cta_primary": "Demander un devis",
     "cta_secondary": "Voir les formules",
     "facts": [
         ("Un seul client à la fois", "pour vous consacrer toute notre attention"),
         ("Une offre écrite", "le contenu, le prix et le délai, noir sur blanc"),
-        ("Basés en Valais", "actifs dans toute la Suisse romande"),
+        ("Basés en Suisse", "on travaille dans toute la Suisse romande"),
     ],
     "art_label": "Motif décoratif : des points reliés entre eux",
 }
@@ -114,6 +117,7 @@ offers = {
             "featured": False,
         },
     ],
+    "cta": "Demander un devis",
     "note": "Prix de départ, pas des prix fixes. Le montant final dépend de votre projet et figure dans une offre écrite, avant tout engagement. Nom de domaine et hébergement en plus (environ CHF 100 à 200 par an).",
     "more_title": "Un autre besoin?",
     "more_text": "Fiche Google, présence Instagram, outil pour vos factures ou vos horaires : parlons-en, on vous dira franchement si on peut le faire.",
@@ -253,7 +257,7 @@ work = {
     },
     "next": "Prochain projet : le site de Vardena, la coopérative de notre classe.",
     "yours": "Le vôtre pourrait suivre.",
-    "yours_cta": "Parlons-en",
+    "yours_cta": "Demander un devis",
 }
 
 proof = {
@@ -296,18 +300,18 @@ faq = {
 
 contact = {
     "tag": "Contact",
-    "title": "Vous avez un projet en tête?",
+    "title": "Demandez votre devis",
     "questions": [
         "Qu’aimeriez-vous que vos clients voient en premier?",
         "Pour quand en avez-vous besoin?",
         "Qui s’occupera de mettre le contenu à jour?",
     ],
-    "no_answers": "Pas besoin d’avoir déjà les réponses : on en parle ensemble.",
+    "no_answers": "Pas besoin d’avoir déjà les réponses : on en parle ensemble, puis vous recevez un devis écrit.",
     "whatsapp": "Écrire sur WhatsApp",
     "call": "Appeler",
     "reply_time": "On vous répond en général dans les 24 heures.",
     "form": {
-        "title": "Ou laissez-nous un message",
+        "title": "Ou décrivez votre projet ici",
         "name": "Votre nom",
         "company": "Votre entreprise",
         "optional": "facultatif",
@@ -315,7 +319,7 @@ contact = {
         "phone": "Votre téléphone",
         "message": "Votre message",
         "message_placeholder": "Dites-nous en quelques mots ce que vous cherchez.",
-        "submit": "Envoyer",
+        "submit": "Demander mon devis",
         "privacy": "Vos coordonnées servent uniquement à vous répondre.",
         "privacy_link": "Protection des données",
     },
@@ -331,7 +335,7 @@ footer = {
         ("protection-donnees/", "Protection des données"),
     ],
     "about": "NexusLab est un projet de la coopérative Vardena, Business Team Academy, HES-SO Valais-Wallis.",
-    "made": "Conçu et développé en Valais, Suisse.",
+    "made": "Conçu et développé en Suisse.",
     "copyright": "NexusLab",
 }
 
