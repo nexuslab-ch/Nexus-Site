@@ -9,6 +9,8 @@ PREFIX = ""  # racine du site pour le français
 
 # Section « Ce que pèse cette page » : retirée le 14.10.2026 pour alléger la page.
 SHOW_PROOF = False
+# Formules et liste de prix : retirées le 14.10.2026, nouvelle offre en cours de définition.
+SHOW_OFFERS = False
 
 # Adresse e-mail NexusLab : formulaire, mentions légales, protection des données.
 CONTACT_EMAIL = "nexuslab.mpa@gmail.com"
@@ -17,7 +19,7 @@ NBSP = " "
 
 meta = {
     "title": "NexusLab, sites web et outils digitaux pour les PME de Suisse romande",
-    "description": "NexusLab crée des sites web simples et des outils digitaux pour les PME et les indépendants de Suisse romande. Une équipe basée en Suisse, un devis écrit avant de commencer, un seul client à la fois. Formules à partir de CHF 690.",
+    "description": "NexusLab crée des sites web simples et des outils digitaux pour les PME et les indépendants de Suisse romande. Une équipe basée en Suisse, un devis écrit avant de commencer, un seul client à la fois.",
     "og_title": "NexusLab, le lien entre votre métier et le digital",
     "og_description": "Sites web et outils digitaux pour les PME de Suisse romande. Un seul client à la fois, des prix clairs, une équipe que vous pouvez appeler.",
     "lang_label": "Français",
@@ -43,7 +45,7 @@ nav = {
     "menu_open": "Ouvrir le menu",
     "menu_close": "Fermer le menu",
     "links": [
-        ("#offres", "Ce qu’on fait"),
+        ("#outils", "Ce qu’on fait"),
         ("#methode", "Comment on travaille"),
         ("#equipe", "L’équipe"),
         ("#realisations", "Réalisations"),
@@ -60,7 +62,7 @@ hero = {
     "title_glitch": ("lien", "nexus"),
     "lede": "Des sites et des outils simples pour les PME et les indépendants de Suisse romande. Décrivez votre projet, vous recevez un devis écrit.",
     "cta_primary": "Demander un devis",
-    "cta_secondary": "Voir les formules",
+    "cta_secondary": "Voir ce qu’on fait",
     "facts": [
         ("Un seul client à la fois", "pour vous consacrer toute notre attention"),
         ("Une offre écrite", "le contenu, le prix et le délai, noir sur blanc"),
@@ -213,7 +215,7 @@ method = {
     "principles_title": "Trois règles qu’on s’est fixées",
     "principles": [
         ("Un seul client à la fois", "On ne commence un nouveau projet qu’une fois le précédent livré. Si on est déjà pris, vous rejoignez la liste d’attente et on vous donne une date."),
-        ("Le site est à vous", "Nom de domaine et hébergement compris, il vous coûte environ CHF 100 à 200 par an, et vous n’êtes lié à aucun abonnement chez nous."),
+        ("Le site est à vous", "Le nom de domaine est à votre nom, et vos textes et vos photos vous appartiennent."),
         ("On répond nous-mêmes", "Trois personnes, un numéro. Vous parlez à ceux qui font votre site, pas à un service client."),
     ],
 }
@@ -286,7 +288,7 @@ faq = {
     "aside": "Une autre question? Appelez-nous, c’est souvent plus rapide.",
     "items": [
         ("Combien coûte un site?",
-         "Un site d’une page coûte à partir de CHF 690, un site complet à partir de CHF 1’200. Le prix exact dépend de ce que vous voulez y mettre, et il est écrit avant de commencer. Le nom de domaine et l’hébergement coûtent en plus environ CHF 100 à 200 par an."),
+         "Ça dépend de ce dont vous avez besoin. On en parle ensemble, puis vous recevez un devis écrit et détaillé, avant tout engagement."),
         ("Combien de temps ça prend?",
          "En général, trois à six semaines entre notre premier échange et la mise en ligne, selon la formule et le temps qu’il vous faut pour nous transmettre vos contenus."),
         ("Est-ce que je peux modifier mon site moi-même?",
