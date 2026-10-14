@@ -413,6 +413,7 @@ main { padding-top: var(--header-h); }
   font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
   background: var(--coral); color: var(--navy); padding: 6px 10px; border-radius: var(--radius-pill);
 }
+.offers-cta { margin-top: 20px; }
 .offers-note { margin-top: 24px; color: var(--ink-2); font-size: 0.9375rem; max-width: 70ch; }
 .more {
   margin-top: 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px;
@@ -942,17 +943,14 @@ a.case-shot:hover .shot-cta, a.case-shot:focus-visible .shot-cta { background: v
 .mock figcaption { margin-top: 14px; font-size: 0.8125rem; color: var(--ink-3); text-align: right; }
 @media (max-width: 1180px) and (min-width: 961px) { #ecran-factures .mock-table td:nth-child(1) { display: none; } }
 @media (max-width: 960px) {
-  .mock { position: sticky; top: calc(var(--header-h) - 14px); z-index: 5; margin: 20px 0 0; padding: 0 0 12px; background: var(--cream); }
-  /* la liste est sous la maquette collée : on garde de l'air en bas pour que la dernière carte puisse monter
-     jusque sous la maquette avant qu'elle ne se décolle (sinon elle reste cachée dessous) */
-  .tools-scroll .tools-list { padding-bottom: 0; }
-  .tools-after { position: relative; z-index: 6; padding-top: 24px; }
-  /* la maquette se décolle avec la fin de la liste ; sous elle, une bande en dégradé efface
-     proprement le texte qui passe dessous, au lieu de le laisser se superposer */
-  .tools-scroll .tools-list { padding-bottom: 8px; }
+  /* Téléphone : la maquette est un bandeau collé sur toute la largeur, fond plein, bord net et ombre légère.
+     Le texte passe proprement dessous, comme sous un en-tête, sans bloc ni dégradé qui coupe les lignes. */
+  .mock { position: sticky; top: calc(var(--header-h) - 14px); z-index: 5;
+          margin: 20px calc(-1 * var(--gutter)) 0; padding: 10px var(--gutter) 14px;
+          background: var(--cream); border-bottom: 1px solid var(--line);
+          box-shadow: 0 14px 18px -16px rgba(29, 29, 31, 0.28); }
+  .tools-scroll .tools-list { padding-bottom: 8px; margin-top: 16px; }
   .tools-after { position: relative; z-index: 6; padding-top: 8px; }
-  .mock::after { content: ""; position: absolute; left: -16px; right: -16px; top: 100%; height: 28px;
-                 background: linear-gradient(180deg, var(--cream) 0%, rgba(250, 249, 247, 0) 100%); pointer-events: none; }
   .mock-win { transform: none; max-height: 38vh; overflow: hidden; }
   .mock figcaption { display: none; }
   .mock-app { min-height: 0; }
