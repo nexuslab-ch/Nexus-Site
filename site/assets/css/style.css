@@ -943,12 +943,11 @@ a.case-shot:hover .shot-cta, a.case-shot:focus-visible .shot-cta { background: v
 .mock figcaption { margin-top: 14px; font-size: 0.8125rem; color: var(--ink-3); text-align: right; }
 @media (max-width: 1180px) and (min-width: 961px) { #ecran-factures .mock-table td:nth-child(1) { display: none; } }
 @media (max-width: 960px) {
-  /* Téléphone : la maquette est un bandeau collé sur toute la largeur, fond plein, bord net et ombre légère.
-     Le texte passe proprement dessous, comme sous un en-tête, sans bloc ni dégradé qui coupe les lignes. */
-  .mock { position: sticky; top: calc(var(--header-h) - 14px); z-index: 5;
-          margin: 20px calc(-1 * var(--gutter)) 0; padding: 10px var(--gutter) 14px;
-          background: var(--cream); border-bottom: 1px solid var(--line);
-          box-shadow: 0 14px 18px -16px rgba(29, 29, 31, 0.28); }
+  /* Téléphone : seule la fausse fenêtre est collée et flotte par-dessus le texte, sans bandeau autour.
+     Une ombre douce la détache de la page. */
+  .mock { position: sticky; top: calc(var(--header-h) - 6px); z-index: 5;
+          margin: 20px 0 0; padding: 0; background: transparent; border: 0; box-shadow: none; }
+  .mock .mock-win { box-shadow: 0 22px 44px -14px rgba(29, 29, 31, 0.35), 0 2px 6px rgba(29, 29, 31, 0.08); }
   .tools-scroll .tools-list { padding-bottom: 8px; margin-top: 16px; }
   .tools-after { position: relative; z-index: 6; padding-top: 8px; }
   .mock-win { transform: none; max-height: 38vh; overflow: hidden; }
