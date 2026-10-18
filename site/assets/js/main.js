@@ -698,7 +698,29 @@
        affiche son écran (idée de Patrick, 07.10). Un clic reprend la main jusqu'au prochain vrai défilement. */
     var tools = Array.prototype.slice.call(document.querySelectorAll(".tools-list .tool[data-tool]"));
     var clickY = -1e9;
+    /* Téléphone et tablette : chaque exemple reçoit une copie de son écran, affichée en entier sous son texte */
+    var shotsMade = false;
+    var makeShots = function () {
+      if (shotsMade || !narrow.matches) { return; }
+      shotsMade = true;
+      var win = mock.querySelector(".mock-win");
+      tools.forEach(function (li) {
+        var c = win.cloneNode(true);
+        c.querySelectorAll(".mock-screen").forEach(function (sc) { if (sc.dataset.screen !== li.dataset.tool) { sc.remove(); } else { sc.hidden = false; } });
+        c.querySelectorAll("[id]").forEach(function (el) { el.removeAttribute("id"); });
+        c.querySelectorAll("[aria-controls]").forEach(function (el) { el.removeAttribute("aria-controls"); });
+        c.querySelectorAll("button, a").forEach(function (el) { el.setAttribute("tabindex", "-1"); });
+        var box = document.createElement("div");
+        box.className = "tool-shot";
+        box.setAttribute("aria-hidden", "true");
+        box.appendChild(c);
+        li.appendChild(box);
+      });
+    };
+    makeShots();
+    if (narrow.addEventListener) { narrow.addEventListener("change", makeShots); }
     var followScroll = function () {
+      if (narrow.matches) { return; }
       if (Math.abs(window.scrollY - clickY) < 160) { return; }
       /* ordinateur : l'exemple qui passe le milieu de l'écran ; téléphone : celui qui passe sous la maquette collée */
       var key = null, i, r;
