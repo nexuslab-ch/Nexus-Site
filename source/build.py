@@ -821,6 +821,8 @@ def build_sitemap(langs):
           "/*\n  X-Content-Type-Options: nosniff\n  X-Frame-Options: DENY\n  Referrer-Policy: strict-origin-when-cross-origin\n"
           "  Permissions-Policy: camera=(), microphone=(), geolocation=()\n\n"
           "/assets/*\n  Cache-Control: public, max-age=2592000\n")
+    # Adresse courte imprimée sur les prospectus (QR code) : mène droit au formulaire de devis
+    write("_redirects", "/devis    /#contact    302\n/devis/   /#contact    302\n")
 
 
 def main():
