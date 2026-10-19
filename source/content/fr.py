@@ -64,7 +64,6 @@ hero = {
     "cta_primary": "Demander un devis",
     "cta_secondary": "Voir ce qu’on fait",
     "facts": [
-        ("Un seul client à la fois", "pour vous consacrer toute notre attention"),
         ("Une offre écrite", "le contenu, le prix et le délai, noir sur blanc"),
         ("Basés en Suisse", "on travaille dans toute la Suisse romande"),
     ],
