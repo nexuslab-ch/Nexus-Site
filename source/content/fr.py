@@ -21,7 +21,7 @@ meta = {
     "title": "NexusLab, sites web et outils digitaux pour les PME de Suisse romande",
     "description": "NexusLab crée des sites web simples et des outils digitaux pour les PME et les indépendants de Suisse romande. Une équipe basée en Suisse, un devis écrit avant de commencer, un seul client à la fois.",
     "og_title": "NexusLab, le lien entre votre métier et le digital",
-    "og_description": "Sites web et outils digitaux pour les PME de Suisse romande. Un seul client à la fois, des prix clairs, une équipe que vous pouvez appeler.",
+    "og_description": "Sites web et outils digitaux pour les PME de Suisse romande. Une offre écrite, une équipe que vous pouvez appeler.",
     "lang_label": "Français",
     "lang_short": "FR",
 }
