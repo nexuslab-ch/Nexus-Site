@@ -63,10 +63,6 @@ hero = {
     "lede": "Des sites et des outils simples pour les PME et les indépendants de Suisse romande. Décrivez votre projet, vous recevez un devis écrit.",
     "cta_primary": "Demander un devis",
     "cta_secondary": "Voir ce qu’on fait",
-    "facts": [
-        ("Une offre écrite", "le contenu, le prix et le délai, noir sur blanc"),
-        ("Basés en Suisse", "on travaille dans toute la Suisse romande"),
-    ],
     "art_label": "Motif décoratif : des points reliés entre eux",
 }
 

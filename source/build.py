@@ -692,8 +692,6 @@ def build_index(c, langs, mods, templates):
     m = common_mapping(c, "home", langs, mods)
     home = page_path(c.LANG, "home")
 
-    hero_facts = "".join("<li class=\"fact\"><strong>%s</strong><span>%s</span></li>" % (esc(a), esc(b)) for a, b in c.hero["facts"])
-
     contact_questions = "".join("<li>%s</li>" % esc(q) for q in c.contact["questions"])
 
     m.update({
@@ -713,7 +711,6 @@ def build_index(c, langs, mods, templates):
         "hero_lede": esc(c.hero["lede"]),
         "hero_cta_primary": esc(c.hero["cta_primary"]),
         "hero_cta_secondary": esc(c.hero["cta_secondary"]),
-        "hero_facts": hero_facts,
         "contact_tag": esc(c.contact["tag"]),
         "contact_title": esc(c.contact["title"]),
         "contact_questions": contact_questions,
