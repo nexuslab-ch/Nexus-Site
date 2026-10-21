@@ -56,14 +56,13 @@ nav = {
 }
 
 hero = {
-    "eyebrow": "Sites web et outils digitaux pour les PME de Suisse romande",
     "title": "Le lien entre votre métier et le digital.",
-    # Au survol, ce mot bascule en glitch vers le second : « Le nexus entre votre métier et le digital. »
-    "title_glitch": ("lien", "nexus"),
+    # Charte : un seul mot clé par titre, en corail profond
+    "title_accent": "lien",
     "lede": "Des sites et des outils simples pour les PME et les indépendants de Suisse romande. Décrivez votre projet, vous recevez un devis écrit.",
     "cta_primary": "Demander un devis",
     "cta_secondary": "Voir ce qu’on fait",
-    "art_label": "Motif décoratif : des points reliés entre eux",
+    "call": "Ou appelez-nous directement au",
 }
 
 offers = {
@@ -139,6 +138,15 @@ tools = {
     # Une clé par exemple ci-dessus, dans le même ordre : couleur (style.css) et écran de la maquette
     "keys": ["factures", "planning", "tableau", "clients", "rh", "autre"],
     "mock_nav": ["Factures", "Planning", "Tableau de bord", "Clients", "RH", "Autre"],
+    # Écrans dans l'esprit du dashboard NexusLab : étiquette, titre, cartes de chiffres, pastilles de statut
+    "mock_brand": "Votre entreprise",
+    "mock_user": ("SB", "Sandra B."),
+    "mock_search": "Rechercher…",
+    "mock_tags": {"factures": "Comptabilité", "planning": "Équipe", "tableau": "Vue d’ensemble",
+                  "clients": "Clients et chantiers", "rh": "Personnel", "autre": "Sur mesure"},
+    "mock_cols": ["Client", "Montant", "Statut"],
+    "mock_kpis": [("Encaissé ce mois", "CHF 2’620", "2 factures payées", False),
+                  ("À encaisser", "CHF 1’610", "dont 1 facture en retard", True)],
     "mock_title": "Factures",
     "mock_rows": [
         ("F-2026-041", "Boulangerie du Bourg", "CHF 480.00", "paid"),
@@ -151,9 +159,13 @@ tools = {
     "mock_total": "Encaissé ce mois",
     "mock_total_value": "CHF 2’620",
     "mock_note": "Exemple d’interface, données fictives.",
+    "mock_short_note": "Données fictives",
     "planning": {
         "title": "Semaine 42", "new": "Créneau",
         "days": ["Lu", "Ma", "Me", "Je", "Ve"],
+        "dates": ["12", "13", "14", "15", "16"],
+        "today": 2,
+        "kinds": {"a": "Matin", "b": "Après-midi", "c": "Journée"},
         # None = libre ; True en 3e élément = remplacement, le créneau couvre alors deux jours
         "rows": [
             ("Sandra", [("7–12", "a"), ("7–12", "a"), None, ("13–18", "b"), ("7–12", "a")]),
@@ -165,7 +177,7 @@ tools = {
     },
     "tableau": {
         "title": "Octobre 2026", "new": "Exporter",
-        "kpis": [("Ventes du mois", "CHF 18’450", "+12 %"), ("Nouveaux clients", "7", "+2"), ("Rendez-vous", "23", "+4")],
+        "kpis": [("Ventes du mois", "CHF 18’450", "+12 % sur septembre"), ("Nouveaux clients", "7", "+2 sur septembre"), ("Rendez-vous", "23", "+4 sur septembre")],
         "chart": "Ventes sur 6 mois",
         "bars": [("Mai", 62), ("Juin", 70), ("Juil.", 55), ("Août", 48), ("Sept.", 81), ("Oct.", 92)],
     },
@@ -174,6 +186,7 @@ tools = {
         "name": "Menuiserie Fellay SA",
         "address": "Rue du Simplon 14, 1920 Martigny",
         "contact": "Marc Fellay · 027 722 14 60",
+        "labels": ("Adresse", "Contact", "Chantier en cours"),
         "site": "Rénovation atelier",
         "step": "Étape 3 sur 4 : finitions",
         "progress": 68,
@@ -182,7 +195,7 @@ tools = {
     },
     "rh": {
         "title": "Absences", "new": "Demande",
-        "counter": "Vacances restantes", "counter_value": "14", "counter_unit": "jours sur 25",
+        "counter": "Vacances restantes", "counter_value": "14", "counter_unit": "jours sur 25", "counter_pct": 56,
         "requests": [
             ("Sandra Bonvin", "Vacances, 20–24 oct.", "ok"),
             ("Luca Rey", "Formation, 3 nov.", "wait"),
@@ -190,10 +203,12 @@ tools = {
         ],
         "status": {"ok": "Validée", "wait": "En attente"},
         "docs": ["Contrat", "Certificat de salaire", "Attestation AVS"],
+        "docs_title": "Documents des collaborateurs",
     },
     "autre": {
         "title": "Votre outil", "text": "Votre outil ici",
         "sub": "Un besoin qui n’entre dans aucune case? On le construit avec vous.",
+        "hints": ["Stocks", "Réservations", "Commandes"],
     },
 }
 
@@ -207,12 +222,6 @@ method = {
         ("Mise en ligne", "Le site est publié et on vous montre comment modifier vos textes et vos photos."),
     ],
     "aside": "De votre côté, il nous faudra votre logo, quelques photos et vos textes ou vos horaires. Si vous n’avez pas tout, on vous aide à le préparer.",
-    "principles_title": "Trois règles qu’on s’est fixées",
-    "principles": [
-        ("Un seul client à la fois", "On ne commence un nouveau projet qu’une fois le précédent livré. Si on est déjà pris, vous rejoignez la liste d’attente et on vous donne une date."),
-        ("Le site est à vous", "Le nom de domaine est à votre nom, et vos textes et vos photos vous appartiennent."),
-        ("On répond nous-mêmes", "Trois personnes, un numéro. Vous parlez à ceux qui font votre site, pas à un service client."),
-    ],
 }
 
 team = {

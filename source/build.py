@@ -451,14 +451,13 @@ def jsonld(c):
 
 
 def hero_title_html(c):
+    """Charte : un seul mot clé par titre, en corail profond. Même police, même graisse."""
     title = esc(c.hero["title"])
-    pair = c.hero.get("title_glitch")
-    if not pair:
+    word = c.hero.get("title_accent")
+    if not word:
         return title
-    word, alt = (esc(x) for x in pair)
-    span = ('<span class="glitch" tabindex="0" data-word="%s" data-alt="%s">'
-            '<span class="glitch-text">%s</span></span>' % (word, alt, word))
-    return title.replace(word, span, 1)
+    w = esc(word)
+    return title.replace(w, '<span class="accent">%s</span>' % w, 1)
 
 
 def middle_sections(c):
@@ -503,27 +502,49 @@ def middle_sections(c):
     ex = "".join(
         '<li class="tool reveal" data-tool="%s"><h3><button type="button" class="tool-btn" data-tool="%s" aria-pressed="%s" aria-controls="ecran-%s">%s</button></h3><p>%s</p></li>'
         % (k, k, pressed(k), k, esc(a), esc(b)) for k, (a, b) in zip(keys, t["examples"]))
+    # Icônes de la barre latérale, au trait, comme dans le dashboard NexusLab
+    ico = {
+        "factures": '<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/>',
+        "planning": '<rect x="4" y="5" width="16" height="15" rx="2.5"/><path d="M4 10h16M9 3v4M15 3v4"/>',
+        "tableau": '<path d="M5 20V11M10 20V5M15 20v-7M20 20V9"/>',
+        "clients": '<path d="M4 8a2 2 0 0 1 2-2h4l2 2h6a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/>',
+        "rh": '<circle cx="9" cy="9" r="3.2"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="10" r="2.4"/><path d="M15.5 14.2A4.5 4.5 0 0 1 21 19"/>',
+        "autre": '<circle cx="12" cy="12" r="8.5"/><path d="M12 8v8M8 12h8"/>',
+    }
+    def svg(k):
+        return ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">%s</svg>' % ico[k])
     nav = "".join(
-        '<li><button type="button" class="mock-nav-btn" data-tool="%s" aria-pressed="%s" aria-controls="ecran-%s">%s</button></li>'
-        % (k, pressed(k), k, esc(n)) for k, n in zip(keys, t["mock_nav"]))
+        '<li><button type="button" class="mock-nav-btn" data-tool="%s" aria-pressed="%s" aria-controls="ecran-%s">%s<span>%s</span></button></li>'
+        % (k, pressed(k), k, svg(k), esc(n)) for k, n in zip(keys, t["mock_nav"]))
 
-    def head(title, new=None):
-        btn = '<span class="mock-btn" aria-hidden="true">+ %s</span>' % esc(new) if new else ""
-        return '<div class="mock-head"><h4>%s</h4>%s</div>' % (esc(title), btn)
+    def initials(name):
+        return "".join(w[0] for w in name.split()[:2]).upper()
+
+    def head(key, title, new=None):
+        plus = "" if key == "tableau" else "+ "
+        btn = '<span class="mock-btn" aria-hidden="true">%s%s</span>' % (plus, esc(new)) if new else ""
+        return ('<div class="mock-head"><div><p class="mock-tag">%s</p><p class="mock-title">%s</p></div>%s</div>'
+                % (esc(t["mock_tags"][key]), esc(title), btn))
+
+    def kpi(label, value, detail, alert=False):
+        return ('<div class="mock-kpi%s"><span class="k-label">%s</span><b class="k-value">%s</b><span class="k-detail">%s</span></div>'
+                % (" is-alert" if alert else "", esc(label), esc(value), esc(detail)))
+
+    badge_cls = {"paid": "t-vert", "wait": "t-gris", "late": "t-rouge", "ok": "t-vert", "pending": "t-jaune"}
 
     screens = {}
-    # Factures et devis : l'écran d'origine
+    # Factures et devis
     rows = "".join(
-        '<tr><td class="mono">%s</td><td>%s</td><td class="mono num">%s</td><td><span class="chip %s">%s</span></td></tr>'
-        % (esc(a), esc(b), esc(cc), st, esc(t["mock_status"][st])) for a, b, cc, st in t["mock_rows"])
+        '<tr><td><b class="m-strong">%s</b><small class="m-sub">%s</small></td><td class="m-num">%s</td><td><span class="m-badge %s">%s</span></td></tr>'
+        % (esc(b), esc(a), esc(cc), badge_cls[st], esc(t["mock_status"][st])) for a, b, cc, st in t["mock_rows"])
     screens["factures"] = (
-        head(t["mock_title"], t["mock_new"]) +
-        '<div class="mock-kpi"><span>%s</span><b>%s</b>'
-        '<svg class="mock-spark" viewBox="0 0 96 34" aria-hidden="true"><path d="M2 28 L16 24 L28 26 L40 17 L52 20 L64 11 L78 13 L94 4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
-        '<table class="mock-table"><tbody>%s</tbody></table>'
-        % (esc(t["mock_total"]), esc(t["mock_total_value"]), rows))
+        head("factures", t["mock_title"], t["mock_new"]) +
+        '<div class="mock-kpis">%s</div>' % "".join(kpi(*k) for k in t["mock_kpis"]) +
+        '<div class="mock-card m-flush"><table class="mock-table"><thead><tr>%s</tr></thead><tbody>%s</tbody></table></div>'
+        % ("".join("<th>%s</th>" % esc(h) for h in t["mock_cols"]), rows))
     # Planning des équipes
     p = t["planning"]
+    kind_cls = {"a": "t-bleu", "b": "t-violet", "c": "t-vert"}
     cells = ""
     for name, slots in p["rows"]:
         tds = ""
@@ -531,62 +552,75 @@ def middle_sections(c):
             if sl is None:
                 tds += '<td><span class="slot slot-free"></span></td>'
             else:
-                swap = '<em class="mock-badge">%s</em>' % esc(p["swap"]) if len(sl) > 2 and sl[2] else ""
-                tds += '<td%s><span class="slot slot-%s%s">%s%s</span></td>' % (' colspan="2"' if swap else "", sl[1], " slot-swap" if swap else "", swap, esc(sl[0]))
-        cells += '<tr><th scope="row">%s</th>%s</tr>' % (esc(name), tds)
+                swap = len(sl) > 2 and sl[2]
+                if swap:
+                    tds += ('<td colspan="2"><span class="slot t-corail slot-swap"><em>%s</em>%s</span></td>' % (esc(p["swap"]), esc(sl[0])))
+                else:
+                    tds += '<td><span class="slot %s">%s</span></td>' % (kind_cls[sl[1]], esc(sl[0]))
+        cells += ('<tr><th scope="row"><span class="m-avatar">%s</span><span class="m-name">%s</span></th>%s</tr>'
+                  % (esc(initials(name)), esc(name), tds))
+    days = "".join('<th%s><small>%s</small><b>%s</b></th>' % (' class="is-today"' if i2 == p["today"] else "", esc(d), esc(n))
+                   for i2, (d, n) in enumerate(zip(p["days"], p["dates"])))
+    legend = "".join('<span class="m-badge %s">%s</span>' % (kind_cls[k], esc(v)) for k, v in p["kinds"].items())
     screens["planning"] = (
-        head(p["title"], p["new"]) +
-        '<table class="mock-plan"><thead><tr><td></td>%s</tr></thead><tbody>%s</tbody></table>'
-        % ("".join("<th>%s</th>" % esc(d) for d in p["days"]), cells))
+        head("planning", p["title"], p["new"]) +
+        '<div class="mock-card"><table class="mock-plan"><thead><tr><td></td>%s</tr></thead><tbody>%s</tbody></table></div>'
+        '<div class="mock-legend">%s</div>' % (days, cells, legend))
     # Tableau de bord
     d = t["tableau"]
-    kp = "".join('<div class="mock-stat%s"><span>%s</span><b>%s</b><small>%s</small></div>'
-                 % (" is-main" if i == 0 else "", esc(a), esc(b), esc(cc)) for i, (a, b, cc) in enumerate(d["kpis"]))
-    bars = "".join('<li%s><i style="--h:%d%%"></i><span>%s</span></li>' % (' class="is-now"' if i == len(d["bars"]) - 1 else "", h, esc(m))
-                   for i, (m, h) in enumerate(d["bars"]))
+    kp = "".join(kpi(a, b, cc) for a, b, cc in d["kpis"])
+    bars = "".join('<li%s><i style="--h:%d%%"></i><span>%s</span></li>' % (' class="is-now"' if i2 == len(d["bars"]) - 1 else "", h, esc(m))
+                   for i2, (m, h) in enumerate(d["bars"]))
     screens["tableau"] = (
-        head(d["title"], d["new"]) +
-        '<div class="mock-stats">%s</div><div class="mock-chart"><span>%s</span><ul class="mock-bars" aria-hidden="true">%s</ul></div>'
+        head("tableau", d["title"], d["new"]) +
+        '<div class="mock-kpis m-three">%s</div><div class="mock-card"><p class="mock-card-title">%s</p><ul class="mock-bars" aria-hidden="true">%s</ul></div>'
         % (kp, esc(d["chart"]), bars))
     # Suivi des clients et des chantiers
     cl = t["clients"]
     doc_icon = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 1.5h5l3.5 3.5v9.5h-8.5z M9 1.5V5h3.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>'
     docs = "".join('<li>%s<span>%s</span><small>%s</small></li>' % (doc_icon, esc(n), esc(dt)) for n, dt in cl["docs"])
+    la, lc, ls = cl["labels"]
     screens["clients"] = (
-        head(cl["title"], cl["new"]) +
-        '<div class="mock-client"><b>%s</b><span>%s</span><span>%s</span></div>'
-        '<div class="mock-site"><div class="mock-site-top"><b>%s</b><span class="mock-badge">%d %%</span></div><span>%s</span>'
-        '<div class="mock-progress" aria-hidden="true"><i style="--p:%d%%"></i></div></div>'
-        '<p class="mock-label">%s</p><ul class="mock-docs">%s</ul>'
-        % (esc(cl["name"]), esc(cl["address"]), esc(cl["contact"]), esc(cl["site"]), cl["progress"], esc(cl["step"]), cl["progress"],
-           esc(cl["docs_title"]), docs))
+        head("clients", cl["title"], cl["new"]) +
+        '<div class="mock-client"><div class="mock-card m-who"><span class="m-avatar m-big">%s</span><div><b>%s</b>'
+        '<dl><dt>%s</dt><dd>%s</dd><dt>%s</dt><dd>%s</dd></dl></div></div>'
+        '<div class="mock-card m-site"><span class="m-ring" style="--p:%d" aria-hidden="true">%d %%</span>'
+        '<div><span class="k-label">%s</span><b>%s</b><span class="k-detail">%s</span></div></div></div>'
+        '<div class="mock-card"><p class="mock-card-title">%s</p><ul class="mock-docs">%s</ul></div>'
+        % (esc(initials(cl["name"])), esc(cl["name"]), esc(la), esc(cl["address"]), esc(lc), esc(cl["contact"]),
+           cl["progress"], cl["progress"], esc(ls), esc(cl["site"]), esc(cl["step"]), esc(cl["docs_title"]), docs))
     # Gestion RH
     rh = t["rh"]
-    reqs = "".join('<tr><td>%s</td><td>%s</td><td><span class="chip %s">%s</span></td></tr>'
-                   % (esc(a), esc(b), "acc" if st == "ok" else "wait", esc(rh["status"][st])) for a, b, st in rh["requests"])
+    reqs = "".join('<tr><td><span class="m-avatar">%s</span><span><b class="m-strong">%s</b><small class="m-sub">%s</small></span></td><td><span class="m-badge %s">%s</span></td></tr>'
+                   % (esc(initials(a)), esc(a), esc(b), "t-vert" if st == "ok" else "t-jaune", esc(rh["status"][st])) for a, b, st in rh["requests"])
     screens["rh"] = (
-        head(rh["title"], rh["new"]) +
-        '<div class="mock-kpi mock-counter"><span>%s</span><b>%s <small>%s</small></b></div>'
-        '<table class="mock-table mock-req"><tbody>%s</tbody></table>'
-        '<ul class="mock-tags">%s</ul>'
-        % (esc(rh["counter"]), esc(rh["counter_value"]), esc(rh["counter_unit"]), reqs,
-           "".join("<li>%s</li>" % esc(x) for x in rh["docs"])))
+        head("rh", rh["title"], rh["new"]) +
+        '<div class="mock-kpi m-wide"><span class="k-label">%s</span><b class="k-value">%s <small>%s</small></b>'
+        '<span class="m-track" aria-hidden="true"><i style="width:%d%%"></i></span></div>'
+        '<div class="mock-card m-flush"><table class="mock-table mock-req"><tbody>%s</tbody></table></div>'
+        '<p class="mock-card-title m-out">%s</p><ul class="mock-tags">%s</ul>'
+        % (esc(rh["counter"]), esc(rh["counter_value"]), esc(rh["counter_unit"]), rh["counter_pct"], reqs,
+           esc(rh["docs_title"]), "".join("<li>%s</li>" % esc(x) for x in rh["docs"])))
     # Autre chose
     au = t["autre"]
     screens["autre"] = (
-        head(au["title"]) +
-        '<div class="mock-empty"><span class="mock-plus" aria-hidden="true">+</span><b>%s</b><span>%s</span>'
+        head("autre", au["title"]) +
+        '<div class="mock-empty"><span class="mock-plus" aria-hidden="true">%s</span><b>%s</b><span>%s</span>'
+        '<ul class="mock-tags m-center">%s</ul>'
         '<a class="btn btn-primary" href="#contact">%s</a></div>'
-        % (esc(au["text"]), esc(au["sub"]), esc(t["cta"])))
+        % (svg("autre"), esc(au["text"]), esc(au["sub"]), "".join("<li>%s</li>" % esc(x) for x in au["hints"]), esc(t["cta"])))
 
     panes = "".join('<div class="mock-screen" id="ecran-%s" data-screen="%s"%s>%s</div>'
                     % (k, k, "" if k == first else " hidden", screens[k]) for k in keys)
+    ui, un = t["mock_user"]
     mock = (
         '<figure class="mock reveal" id="outils-maquette" data-tool="%s" aria-label="%s">'
-        '<div class="mock-win"><div class="mock-top"><span class="term-lights" aria-hidden="true"><i></i><i></i><i></i></span><span>outil.votre-entreprise.ch</span></div>'
-        '<div class="mock-app"><ul class="mock-nav">%s</ul><div class="mock-main">%s</div></div></div>'
+        '<div class="mock-win"><div class="mock-top"><span>outil.votre-entreprise.ch</span><em class="mock-note">%s</em></div>'
+        '<div class="mock-app"><div class="mock-side"><p class="mock-brand"><i aria-hidden="true"></i>%s</p><ul class="mock-nav">%s</ul>'
+        '<p class="mock-me"><span class="m-avatar">%s</span>%s</p></div>'
+        '<div class="mock-main"><div class="mock-bar" aria-hidden="true"><span class="mock-search">%s</span><span class="m-avatar">%s</span></div>%s</div></div></div>'
         '<figcaption>%s</figcaption></figure>'
-        % (first, esc(t["mock_note"]), nav, panes, esc(t["mock_note"])))
+        % (first, esc(t["mock_note"]), esc(t["mock_short_note"]), esc(t["mock_brand"]), nav, esc(ui), esc(un), esc(t["mock_search"]), esc(ui), panes, esc(t["mock_note"])))
     H.append(
         '<section class="section tools-sec" id="outils" aria-labelledby="outils-title"><div class="container">'
         '<div class="tools-grid"><div class="tools-intro reveal">%s<h2 id="outils-title">%s</h2><p class="lede">%s</p></div>'
@@ -600,18 +634,13 @@ def middle_sections(c):
     steps = "".join(
         '<li class="card step reveal"><span class="step-num" aria-hidden="true">%d</span><h3>%s</h3><p>%s</p></li>' % (i + 1, esc(t), esc(d))
         for i, (t, d) in enumerate(c.method["steps"]))
-    rules = "".join(
-        '<li class="rule reveal"><span class="rule-num" aria-hidden="true">0%d</span><h3>%s</h3><p>%s</p></li>' % (i + 1, esc(t), esc(d))
-        for i, (t, d) in enumerate(c.method["principles"]))
     H.append(
         '<section class="section section-dark night" id="methode" aria-labelledby="methode-title">'
         '<canvas class="night-sky" aria-hidden="true"></canvas><div class="night-moon" aria-hidden="true"></div>%s'
         '<div class="container night-content"><div class="section-head reveal">%s<h2 id="methode-title">%s</h2></div>'
         '<ol class="grid-4 steps">%s</ol><p class="aside reveal">%s</p>'
-        '<div class="rules"><h3 class="rules-title reveal">%s</h3><ol class="rules-list">%s</ol></div>'
         '</div></section>'
-        % (alps_night(), tag(c.method["tag"]), esc(c.method["title"]), steps, esc(c.method["aside"]),
-           esc(c.method["principles_title"]), rules))
+        % (alps_night(), tag(c.method["tag"]), esc(c.method["title"]), steps, esc(c.method["aside"])))
 
     # Équipe : grande photo si elle existe, puis texte et liste, sans cartes
     photo = ""
@@ -676,16 +705,20 @@ def middle_sections(c):
            row(pr["weight"], "kb", "Ko"), row(pr["time"], "time", "s"), row(pr["requests"], "req"), row(pr["cookies"], "cookies"),
            esc(pr["compare_us"]), esc(pr["compare_web"]), esc(pr["ratio"]), esc(pr["unavailable"])))
 
-    # FAQ : deux colonnes
-    faq_items = "".join(
-        '<details class="faq-item reveal"><summary>%s</summary><div class="faq-body"><p>%s</p></div></details>' % (esc(q), esc(a))
-        for q, a in c.faq["items"])
-    H.append(
-        '<section class="section" id="faq" aria-labelledby="faq-title"><div class="container faq-grid">'
-        '<div class="faq-side reveal">%s<h2 id="faq-title">%s</h2><p class="muted">%s <a href="tel:%s">%s</a></p></div>'
-        '<div class="faq-list">%s</div></div></section>'
-        % (tag(c.faq["tag"]), esc(c.faq["title"]), esc(c.faq["aside"]), esc(c.brand["phone_tel"]), esc(c.brand["phone_display"]), faq_items))
     return "\n".join(H)
+
+
+def footer_faq(c):
+    """Questions fréquentes, en bas de page dans le pied de page (demande de Mehdi, 21.10) : plus épuré."""
+    items = "".join(
+        '<details class="ffaq-item"><summary>%s</summary><p>%s</p></details>' % (esc(q), esc(a))
+        for q, a in c.faq["items"])
+    return (
+        '<section class="footer-faq" id="faq" aria-labelledby="faq-title">'
+        '<div class="ffaq-side"><h2 class="footer-title" id="faq-title">%s</h2>'
+        '<p>%s <a href="tel:%s">%s</a></p></div>'
+        '<div class="ffaq-list">%s</div></section>'
+        % (esc(c.faq["title"]), esc(c.faq["aside"]), esc(c.brand["phone_tel"]), esc(c.brand["phone_display"]), items))
 
 
 def build_index(c, langs, mods, templates):
@@ -696,6 +729,7 @@ def build_index(c, langs, mods, templates):
 
     m.update({
         "middle_sections": middle_sections(c),
+        "footer_faq": footer_faq(c),
         "meta_title": esc(c.meta["title"]),
         "meta_description": esc(c.meta["description"]),
         "canonical": SITE_URL + home,
@@ -704,8 +738,8 @@ def build_index(c, langs, mods, templates):
         "og_description": esc(c.meta["og_description"]),
         "og_image_alt": esc(c.brand["name"] + ", " + c.brand["signature"]),
         "jsonld": jsonld(c),
-        "hero_eyebrow": esc(c.hero["eyebrow"]),
         "hero_title": hero_title_html(c),
+        "hero_call": esc(c.hero["call"]),
         "hero_alps": alps_hero(),
         "night_alps": alps_night(),
         "hero_lede": esc(c.hero["lede"]),
