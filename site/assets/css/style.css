@@ -64,15 +64,18 @@
 
 /* ---------- Base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
-/* Quand la page rebondit en haut (on tire pour recharger), on voit ce qu'il y a derrière la page.
+/* Quand la page rebondit en haut ou en bas (on tire pour recharger), on voit ce qu'il y a derrière la page.
    Ordinateur : le fond du document. Téléphone (Safari, navigateurs des applications) : ce fond n'est pas
    toujours utilisé, d'où un aplat fixé en haut de l'écran, sous la page (z-index -1), qui n'apparaît que
    dans l'espace découvert. Même gris que le haut du ciel de l'accueil. */
-html { background-color: #D9D9DF; }
-body:has(.hero)::before {
-  content: ""; position: fixed; left: 0; right: 0; top: 0; height: 60vh; z-index: -1; pointer-events: none;
-  background: #D9D9DF;
+/* En haut : couleur du haut de la page (gris du ciel sur l'accueil, blanc cassé ailleurs).
+   En bas : anthracite du pied de page. */
+html { background-color: #1D1D1F; }
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(180deg, #FAF9F7 0 50%, #1D1D1F 50% 100%);
 }
+body:has(.hero)::before { background: linear-gradient(180deg, #D9D9DF 0 50%, #1D1D1F 50% 100%); }
 html { scroll-behavior: smooth; scroll-padding-top: 100px; -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
@@ -275,6 +278,44 @@ main { padding-top: var(--header-h); }
   .hero-actions .btn { width: 100%; }
 }
 
+
+/* Mot de l'accueil qui bascule en glitch (lien vers nexus) */
+.glitch {
+  position: relative; display: inline-block; white-space: nowrap; vertical-align: top;
+  color: inherit; cursor: default; outline: none;
+  transition: color 0.3s ease, width 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.glitch-text { position: relative; display: inline-block; }
+.glitch::before, .glitch::after {
+  content: attr(data-shown); position: absolute; left: 0; top: 0; pointer-events: none; opacity: 0;
+}
+.glitch::before { color: var(--coral); }
+.glitch::after { color: #8E8E93; }
+.glitch.is-glitching::before { opacity: 0.85; animation: glitch-a 0.42s steps(2, end) both; }
+.glitch.is-glitching::after { opacity: 0.75; animation: glitch-b 0.42s steps(2, end) both; }
+.glitch.is-glitching .glitch-text { animation: glitch-jitter 0.42s steps(3, end) both; }
+.glitch.is-alt { color: var(--coral-deep); }
+.glitch:focus-visible { outline: 3px solid var(--coral); outline-offset: 4px; border-radius: 8px; }
+@keyframes glitch-a {
+  0%   { clip-path: inset(10% 0 62% 0); transform: translate(-4px, -2px); }
+  25%  { clip-path: inset(58% 0 12% 0); transform: translate(5px, 1px); }
+  50%  { clip-path: inset(28% 0 44% 0); transform: translate(-3px, 2px); }
+  75%  { clip-path: inset(72% 0 4% 0);  transform: translate(4px, -1px); }
+  100% { clip-path: inset(40% 0 40% 0); transform: translate(0, 0); opacity: 0; }
+}
+@keyframes glitch-b {
+  0%   { clip-path: inset(66% 0 8% 0);  transform: translate(4px, 2px); }
+  25%  { clip-path: inset(6% 0 70% 0);  transform: translate(-5px, -1px); }
+  50%  { clip-path: inset(46% 0 26% 0); transform: translate(3px, -2px); }
+  75%  { clip-path: inset(18% 0 56% 0); transform: translate(-4px, 1px); }
+  100% { clip-path: inset(40% 0 40% 0); transform: translate(0, 0); opacity: 0; }
+}
+@keyframes glitch-jitter {
+  0%   { transform: translate(0, 0) skewX(0); }
+  33%  { transform: translate(2px, -1px) skewX(-6deg); }
+  66%  { transform: translate(-2px, 1px) skewX(4deg); }
+  100% { transform: translate(0, 0) skewX(0); }
+}
 
 /* ---------- Sections ---------- */
 .section { padding: var(--section) 0; }
@@ -772,6 +813,14 @@ a.case-shot:hover .shot-cta, a.case-shot:focus-visible .shot-cta { background: v
 .tools-scroll .tools-list { grid-area: list; } .tools-scroll .mock { grid-area: mock; }
 .tools-grid h2 { max-width: 13ch; }
 .tools-grid .lede { margin-top: 20px; }
+/* Ce qu'on fait, en trois familles */
+.families { list-style: none; margin-top: 28px; display: grid; gap: 16px; }
+.families li { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 14px; align-items: start; }
+.fam-icon { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--white); border: 1px solid var(--line); color: var(--coral-deep); box-shadow: var(--shadow-s); }
+.fam-icon svg { width: 20px; height: 20px; }
+.families h3 { font-size: 1.0625rem; }
+.families p { margin-top: 2px; color: var(--ink-2); font-size: 0.9875rem; max-width: 52ch; }
+.examples-label { margin-top: 32px; font-weight: 700; }
 .tools-list { list-style: none; margin-top: 32px; display: grid; grid-template-columns: 1fr; gap: 4px 16px; }
 /* sur ordinateur, une seule colonne : la liste défile à côté de la maquette collée, qui change d'écran au passage */
 [data-tool="factures"] { --acc: var(--t-factures); --acc-soft: var(--t-factures-soft); --acc-ink: var(--t-factures-ink); }
@@ -985,9 +1034,11 @@ a.case-shot:hover .shot-cta, a.case-shot:focus-visible .shot-cta { background: v
   .tools-list .tool { padding-bottom: 18px; }
 }
 @media (max-width: 600px) {
+  /* téléphone : la fenêtre est réduite d'un cran, pour que tout son contenu tienne et qu'on voie la liste dessous */
+  .tools-scroll .mock-win { zoom: 0.88; }
   .mock-app { grid-template-columns: 1fr; padding: 10px; }
   .mock-side { display: none; }
-  .mock-main { height: 272px; }
+  .mock-main { height: 262px; }
   .mock-empty { min-height: 200px; padding: 16px; }
   .mock-legend { display: none; }
 }

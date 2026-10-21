@@ -457,6 +457,11 @@ def hero_title_html(c):
     if not word:
         return title
     w = esc(word)
+    alt = c.hero.get("title_glitch")
+    if alt:
+        # Au survol (au toucher sur téléphone), le mot clé bascule un instant en glitch vers « nexus »
+        return title.replace(w, '<span class="accent glitch" tabindex="0" data-word="%s" data-alt="%s">'
+                                '<span class="glitch-text">%s</span></span>' % (w, esc(alt), w), 1)
     return title.replace(w, '<span class="accent">%s</span>' % w, 1)
 
 
@@ -531,6 +536,15 @@ def middle_sections(c):
                 % (" is-alert" if alert else "", esc(label), esc(value), esc(detail)))
 
     badge_cls = {"paid": "t-vert", "wait": "t-gris", "late": "t-rouge", "ok": "t-vert", "pending": "t-jaune"}
+
+    fam_ico = {
+        "gerer": '<path d="M4 5h16v14H4z"/><path d="M4 9h16M9 9v10"/>',
+        "auto": '<path d="M20 12a8 8 0 0 1-14 5.3M4 12a8 8 0 0 1 14-5.3"/><path d="M18 3v4h-4M6 21v-4h4"/>',
+        "site": '<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.5 2.6 14.5 0 17M12 3.5c-2.6 2.5-2.6 14.5 0 17"/>',
+    }
+    families = "".join(
+        '<li><span class="fam-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">%s</svg></span>'
+        '<div><h3>%s</h3><p>%s</p></div></li>' % (fam_ico[k], esc(a), esc(b)) for k, a, b in t["families"])
 
     screens = {}
     # Factures et devis
@@ -623,12 +637,13 @@ def middle_sections(c):
         % (first, esc(t["mock_note"]), esc(t["mock_short_note"]), esc(t["mock_brand"]), nav, esc(ui), esc(un), esc(t["mock_search"]), esc(ui), panes, esc(t["mock_note"])))
     H.append(
         '<section class="section tools-sec" id="outils" aria-labelledby="outils-title"><div class="container">'
-        '<div class="tools-grid"><div class="tools-intro reveal">%s<h2 id="outils-title">%s</h2><p class="lede">%s</p></div>'
+        '<div class="tools-grid"><div class="tools-intro reveal">%s<h2 id="outils-title">%s</h2><p class="lede">%s</p>'
+        '<ul class="families">%s</ul><p class="examples-label">%s</p></div>'
         '<div class="tools-scroll">%s<ul class="tools-list">%s</ul></div>'
         '<div class="tools-after"><p class="tools-proof reveal">%s</p>'
         '<div class="tools-cta reveal"><a class="btn btn-primary" href="#contact">%s</a><span>%s</span></div></div>'
         '</div></div></section>'
-        % (tag(t["tag"]), esc(t["title"]), esc(t["intro"]), mock, ex, esc(t["proof"]), esc(t["cta"]), esc(t["price"])))
+        % (tag(t["tag"]), esc(t["title"]), esc(t["intro"]), families, esc(t["examples_label"]), mock, ex, esc(t["proof"]), esc(t["cta"]), esc(t["price"])))
 
     # Méthode : paysage de nuit, étapes reliées, règles en liste (sans cartes)
     steps = "".join(

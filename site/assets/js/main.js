@@ -90,6 +90,69 @@
     if (document.readyState === "complete") { ready(); } else { window.addEventListener("load", function () { setTimeout(ready, 0); }); }
   }
 
+  /* Accueil : « lien » bascule en glitch vers « nexus » au survol (au toucher sur mobile).
+     Les lettres se brouillent quelques images, puis se posent ; la largeur du mot suit en douceur. */
+  document.querySelectorAll(".glitch").forEach(function (el) {
+    var text = el.querySelector(".glitch-text");
+    var word = el.dataset.word, alt = el.dataset.alt;
+    var current = word, raf = 0;
+    var CHARS = "nexusl!<>/#*_01%&?";
+    var measure = function (str) {
+      var probe = text.cloneNode(true);
+      probe.textContent = str;
+      probe.style.position = "absolute"; probe.style.visibility = "hidden";
+      el.appendChild(probe);
+      var w = probe.getBoundingClientRect().width;
+      el.removeChild(probe);
+      return w;
+    };
+    var setShown = function (str) { text.textContent = str; el.setAttribute("data-shown", str); };
+    setShown(word);
+
+    var swap = function (target) {
+      if (current === target) { return; }
+      current = target;
+      el.classList.toggle("is-alt", target === alt);
+      if (reduced) { setShown(target); return; }
+      cancelAnimationFrame(raf);
+      el.style.width = el.getBoundingClientRect().width + "px";
+      void el.offsetWidth;
+      el.style.width = measure(target) + "px";
+      el.classList.remove("is-glitching"); void el.offsetWidth; el.classList.add("is-glitching");
+      var start = performance.now(), DUR = 420;
+      var frame = function (now) {
+        var k = Math.min(1, (now - start) / DUR);
+        var settled = Math.floor(k * target.length);
+        var out = "";
+        for (var i = 0; i < target.length; i++) {
+          out += i < settled ? target[i] : CHARS[(Math.random() * CHARS.length) | 0];
+        }
+        setShown(k < 1 ? out : target);
+        if (k < 1) { raf = requestAnimationFrame(frame); }
+        else { el.classList.remove("is-glitching"); el.style.width = ""; }
+      };
+      raf = requestAnimationFrame(frame);
+    };
+
+    /* Easter egg : « nexus » s'affiche un instant, puis le mot redevient « lien » tout seul.
+       Il faut quitter le mot et revenir pour le relancer. */
+    var timer = 0, armed = true;
+    var play = function () {
+      if (!armed) { return; }
+      armed = false;
+      swap(alt);
+      clearTimeout(timer);
+      timer = setTimeout(function () { swap(word); }, 1500);
+    };
+    var rearm = function () { armed = true; };
+    el.addEventListener("pointerenter", function (e) { if (e.pointerType !== "touch") { play(); } });
+    el.addEventListener("pointerleave", function (e) { if (e.pointerType !== "touch") { rearm(); } });
+    el.addEventListener("focus", play);
+    el.addEventListener("blur", rearm);
+    el.addEventListener("touchstart", function () { rearm(); play(); }, { passive: true });
+  });
+
+
   /* Ciel nocturne de la méthode : étoiles qui scintillent et, de temps en temps, une étoile filante.
      Seule animation gardée sur le site (demande de Mehdi, 21.10). */
   var sky = document.querySelector(".night-sky");

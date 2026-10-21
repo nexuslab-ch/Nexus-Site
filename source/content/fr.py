@@ -18,10 +18,10 @@ CONTACT_EMAIL = "nexuslab.mpa@gmail.com"
 NBSP = " "
 
 meta = {
-    "title": "NexusLab, sites web et outils digitaux pour les PME de Suisse romande",
-    "description": "NexusLab crée des sites web simples et des outils digitaux pour les PME et les indépendants de Suisse romande. Une équipe basée en Suisse, un devis écrit avant de commencer, un seul client à la fois.",
+    "title": "NexusLab, logiciels de gestion et sites web pour les indépendants de Suisse romande",
+    "description": "NexusLab crée des logiciels de gestion sur mesure, des automatisations et des sites web pour les indépendants et les petites entreprises de Suisse romande. Une équipe basée en Suisse et un devis écrit avant de commencer.",
     "og_title": "NexusLab, le lien entre votre métier et le digital",
-    "og_description": "Sites web et outils digitaux pour les PME de Suisse romande. Une offre écrite, une équipe que vous pouvez appeler.",
+    "og_description": "Logiciels de gestion et sites web sur mesure pour les indépendants et les petites entreprises de Suisse romande. Une offre écrite, une équipe que vous pouvez appeler.",
     "lang_label": "Français",
     "lang_short": "FR",
 }
@@ -59,7 +59,9 @@ hero = {
     "title": "Le lien entre votre métier et le digital.",
     # Charte : un seul mot clé par titre, en corail profond
     "title_accent": "lien",
-    "lede": "Des sites et des outils simples pour les PME et les indépendants de Suisse romande. Décrivez votre projet, vous recevez un devis écrit.",
+    # Au survol, ce mot bascule en glitch vers : « Le nexus entre votre métier et le digital. »
+    "title_glitch": "nexus",
+    "lede": "Des logiciels de gestion et des sites web sur mesure pour les indépendants et les petites entreprises de Suisse romande. Décrivez votre projet, vous recevez un devis écrit.",
     "cta_primary": "Demander un devis",
     "cta_secondary": "Voir ce qu’on fait",
 }
@@ -121,8 +123,15 @@ offers = {
 
 tools = {
     "tag": "Sur mesure",
-    "title": "On ne fait pas que des sites.",
+    "title": "Des outils faits pour votre façon de travailler.",
     "intro": "Si une tâche vous prend trop de temps chaque semaine, on peut souvent en faire un outil. Un tableau Excel qui déborde, des factures faites à la main, des horaires envoyés par WhatsApp : dites-nous ce qui vous ralentit, on vous propose quelque chose de fait pour votre entreprise.",
+    # Ce qu'on fait, en trois familles (la barre du logo : « l'outil, le site, l'automatisation »)
+    "families": [
+        ("gerer", "Gérer votre activité", "Un logiciel fait pour vous : factures, stock, planning, clients. Du petit outil à un ERP complet, à la taille de votre structure."),
+        ("auto", "Gagner du temps", "On automatise ce qui se répète : relances, rapports, formulaires, échanges entre vos outils."),
+        ("site", "Être trouvé", "Un site clair, pensé d’abord pour le téléphone, avec un bouton pour vous appeler."),
+    ],
+    "examples_label": "Quelques exemples d’outils qu’on peut construire :",
     "examples": [
         ("Factures et devis", "Créer une facture avec QR-facture en quelques clics, suivre qui a payé et qui est en retard."),
         ("Planning des équipes", "Les horaires et les remplacements au même endroit, consultables sur le téléphone de chacun."),
@@ -217,8 +226,8 @@ method = {
     "steps": [
         ("Échange", "On se rencontre, chez vous ou à distance, et vous nous expliquez ce dont vous avez besoin."),
         ("Offre écrite", "Vous recevez une offre avec le contenu, le prix et le délai. Rien ne commence sans votre accord."),
-        ("Maquette", "On vous montre à quoi ressemblera le site avant de le construire. Vous pouvez demander des changements."),
-        ("Mise en ligne", "Le site est publié et on vous montre comment modifier vos textes et vos photos."),
+        ("Maquette", "On vous montre à quoi ressemblera votre outil ou votre site avant de le construire. Vous pouvez demander des changements."),
+        ("Mise en ligne", "On le met en ligne et on vous montre comment vous en servir au quotidien."),
     ],
     "aside": "De votre côté, il nous faudra votre logo, quelques photos et vos textes ou vos horaires. Si vous n’avez pas tout, on vous aide à le préparer.",
 }

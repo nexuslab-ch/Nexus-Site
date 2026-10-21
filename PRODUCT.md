@@ -8,17 +8,16 @@ web
 
 ## Users
 
-Patrons de petites entreprises et indépendants de Suisse romande, avec le Valais comme premier terrain : artisans, commerces, cabinets, petites PME. Ils connaissent leur métier, pas le digital, et n’ont ni le temps ni l’envie d’apprendre le jargon. Ils arrivent sur nexus-lab.ch pour savoir si NexusLab peut les aider, à quel prix et avec qui ils vont parler, puis pour demander un devis ou appeler.
+Indépendants et petites entreprises de Suisse romande (les petites structures d’abord, plutôt que les PME établies), avec le Valais comme premier terrain : artisans, commerces, cabinets. Ils connaissent leur métier, pas le digital, et n’ont ni le temps ni l’envie d’apprendre le jargon. Ils arrivent sur nexus-lab.ch pour savoir si NexusLab peut les aider, à quel prix et avec qui ils vont parler, puis pour demander un devis ou appeler.
 
 ## Product Purpose
 
-NexusLab est une petite équipe qui crée pour ces entreprises des sites web simples et des outils digitaux sur mesure (factures avec QR-facture, planning des équipes, tableau de bord, suivi des clients et des chantiers, gestion RH). Les deux offres ont le même poids : le site n’est pas un produit d’appel pour les outils, ni l’inverse.
+NexusLab est une petite équipe qui crée pour ces entreprises des outils digitaux sur mesure, en trois familles : gérer l’activité (logiciels de gestion, du petit outil à l’ERP : factures, stock, planning, clients), gagner du temps (automatisations : relances, rapports, formulaires, liens entre outils) et être trouvé (sites web). Elle reste ouverte à d’autres besoins digitaux. Concrètement, des sites web simples et des outils sur mesure (factures avec QR-facture, planning des équipes, tableau de bord, suivi des clients et des chantiers, gestion RH). Les deux offres ont le même poids : le site n’est pas un produit d’appel pour les outils, ni l’inverse.
 
 Le site nexus-lab.ch réussit quand un patron comprend ce qu’on peut faire pour lui, fait confiance à l’équipe et envoie une demande de devis (formulaire, WhatsApp ou appel).
 
 ## Positioning
 
-- Un seul client à la fois : un nouveau projet ne commence qu’une fois le précédent livré, avec liste d’attente et date annoncée.
 - Une offre écrite (contenu, prix, délai) avant tout engagement ; rien ne commence sans l’accord du client.
 - Le client est propriétaire : nom de domaine à son nom, textes et photos à lui.
 - On parle directement à ceux qui font le travail : trois personnes, un numéro, pas de service client.
