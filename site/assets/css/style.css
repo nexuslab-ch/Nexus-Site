@@ -64,9 +64,15 @@
 
 /* ---------- Base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
-/* Quand la page rebondit en haut (on tire pour recharger), on voit le fond du document :
-   même gris que le haut du ciel de l'accueil, pour ne plus voir de bloc blanc cassé. */
+/* Quand la page rebondit en haut (on tire pour recharger), on voit ce qu'il y a derrière la page.
+   Ordinateur : le fond du document. Téléphone (Safari, navigateurs des applications) : ce fond n'est pas
+   toujours utilisé, d'où un aplat fixé en haut de l'écran, sous la page (z-index -1), qui n'apparaît que
+   dans l'espace découvert. Même gris que le haut du ciel de l'accueil. */
 html { background-color: #D9D9DF; }
+body:has(.hero)::before {
+  content: ""; position: fixed; left: 0; right: 0; top: 0; height: 60vh; z-index: -1; pointer-events: none;
+  background: #D9D9DF;
+}
 html { scroll-behavior: smooth; scroll-padding-top: 100px; -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
