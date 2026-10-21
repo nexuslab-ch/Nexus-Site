@@ -39,9 +39,9 @@ VERSION = _version()
 sys.path.insert(0, HERE)
 
 DEFAULT_SLUGS = {
-    "fr": {"legal": "mentions-legales", "privacy": "protection-donnees", "thanks": "merci"},
-    "de": {"legal": "impressum", "privacy": "datenschutz", "thanks": "danke"},
-    "en": {"legal": "legal-notice", "privacy": "privacy", "thanks": "thank-you"},
+    "fr": {"legal": "mentions-legales", "privacy": "protection-donnees", "thanks": "merci", "faq": "questions-frequentes"},
+    "de": {"legal": "impressum", "privacy": "datenschutz", "thanks": "danke", "faq": "haeufige-fragen"},
+    "en": {"legal": "legal-notice", "privacy": "privacy", "thanks": "thank-you", "faq": "faq"},
 }
 
 LOGO_SVG = (
@@ -717,8 +717,21 @@ def footer_faq(c):
         '<section class="footer-faq" id="faq" aria-labelledby="faq-title">'
         '<div class="ffaq-side"><h2 class="footer-title" id="faq-title">%s</h2>'
         '<p>%s <a href="tel:%s">%s</a></p></div>'
-        '<div class="ffaq-list">%s</div></section>'
-        % (esc(c.faq["title"]), esc(c.faq["aside"]), esc(c.brand["phone_tel"]), esc(c.brand["phone_display"]), items))
+        '<div class="ffaq-list">%s</div>'
+        '<a class="ffaq-link" href="%s">%s %s</a></section>'
+        % (esc(c.faq["title"]), esc(c.faq["aside"]), esc(c.brand["phone_tel"]), esc(c.brand["phone_display"]), items,
+           page_path(c.LANG, "faq"), esc(c.faq["link"]), ICONS["arrow"]))
+
+
+def faq_body(c):
+    """Page « Questions fréquentes » (lien du pied de page sur téléphone)."""
+    items = "".join(
+        '<details class="faq-item"><summary>%s</summary><div class="faq-body"><p>%s</p></div></details>' % (esc(q), esc(a))
+        for q, a in c.faq["items"])
+    return ('<h1>%s</h1><p class="intro">%s <a href="tel:%s">%s</a></p><div class="faq-list faq-page">%s</div>'
+            '<a class="btn btn-primary" href="%s">%s</a>'
+            % (esc(c.faq["title"]), esc(c.faq["aside"]), esc(c.brand["phone_tel"]), esc(c.brand["phone_display"]), items,
+               page_path(c.LANG, "home"), esc(c.faq["back"])))
 
 
 def build_index(c, langs, mods, templates):
@@ -739,7 +752,6 @@ def build_index(c, langs, mods, templates):
         "og_image_alt": esc(c.brand["name"] + ", " + c.brand["signature"]),
         "jsonld": jsonld(c),
         "hero_title": hero_title_html(c),
-        "hero_call": esc(c.hero["call"]),
         "hero_alps": alps_hero(),
         "night_alps": alps_night(),
         "hero_lede": esc(c.hero["lede"]),
@@ -811,6 +823,10 @@ def build_lang(lang, langs, mods, templates):
     write(page_path(lang, "privacy").lstrip("/") + "index.html",
           build_simple(c, "privacy", langs, mods, templates, legal_body(c.privacy, c), c.privacy["meta_title"]))
 
+    write(page_path(lang, "faq").lstrip("/") + "index.html",
+          build_simple(c, "faq", langs, mods, templates, faq_body(c), c.faq["title"],
+                       description=c.faq.get("meta_description")))
+
     thanks = (
         '<h1>%s</h1><p class="lede">%s</p>'
         '<p><a class="btn btn-primary" href="%s">%s</a> <a class="btn btn-ghost" href="%s" rel="noopener" target="_blank">%s</a></p>'
@@ -831,7 +847,7 @@ def build_lang(lang, langs, mods, templates):
 def build_sitemap(langs):
     today = date.today().isoformat()
     urls = []
-    for kind in ("home", "legal", "privacy"):
+    for kind in ("home", "faq", "legal", "privacy"):
         for lang in langs:
             alts = "".join(
                 '<xhtml:link rel="alternate" hreflang="%s" href="%s%s"/>' % (l2, SITE_URL, page_path(l2, kind)) for l2 in langs

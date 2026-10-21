@@ -62,7 +62,6 @@ hero = {
     "lede": "Des sites et des outils simples pour les PME et les indépendants de Suisse romande. Décrivez votre projet, vous recevez un devis écrit.",
     "cta_primary": "Demander un devis",
     "cta_secondary": "Voir ce qu’on fait",
-    "call": "Ou appelez-nous directement au",
 }
 
 offers = {
@@ -290,6 +289,9 @@ faq = {
     "tag": "",
     "title": "Questions fréquentes",
     "aside": "Une autre question? Appelez-nous, c’est souvent plus rapide.",
+    "link": "Voir les questions fréquentes",
+    "back": "Retour à l’accueil",
+    "meta_description": "Prix, délais, paiement au mois, modifications : les réponses aux questions qu’on nous pose le plus souvent.",
     "items": [
         ("Combien coûte un site ou un outil?",
          "Ça dépend de ce dont vous avez besoin. On en parle ensemble, puis vous recevez un devis écrit et détaillé, avant tout engagement."),
