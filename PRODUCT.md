@@ -14,7 +14,7 @@ Indépendants et petites entreprises de Suisse romande (les petites structures d
 
 NexusLab est une petite équipe qui crée pour ces entreprises des outils digitaux sur mesure, en trois familles : gérer l’activité (logiciels de gestion, du petit outil à l’ERP : factures, stock, planning, clients), gagner du temps (automatisations : relances, rapports, formulaires, liens entre outils) et être trouvé (sites web). Elle reste ouverte à d’autres besoins digitaux. Concrètement, des sites web simples et des outils sur mesure (factures avec QR-facture, planning des équipes, tableau de bord, suivi des clients et des chantiers, gestion RH). Les deux offres ont le même poids : le site n’est pas un produit d’appel pour les outils, ni l’inverse.
 
-Le site nexus-lab.ch réussit quand un patron comprend ce qu’on peut faire pour lui, fait confiance à l’équipe et envoie une demande de devis (formulaire, WhatsApp ou appel).
+Le site nexus-lab.ch réussit quand un patron comprend ce qu’on peut faire pour lui, fait confiance à l’équipe et envoie une demande de devis (formulaire ou e-mail).
 
 ## Positioning
 
@@ -28,8 +28,8 @@ Le site nexus-lab.ch réussit quand un patron comprend ce qu’on peut faire pou
 
 - Déroulé d’un projet : échange (sur place ou à distance), offre écrite, maquette validée avant construction, mise en ligne avec prise en main pour modifier textes et photos.
 - Le client fournit logo, photos, textes ou horaires ; l’équipe aide à les préparer s’ils manquent.
-- Contact : formulaire (FormSubmit vers nexuslab.mpa@gmail.com), WhatsApp et téléphone +41 79 737 87 92 ; réponse en général sous 24 heures.
-- Équipe : Patrick Lugon (pilotage des projets et design, interlocuteur au téléphone), Mehdi Chouchane (développement des sites et outils, comptes), Arno Blatter (rencontre des entreprises, suivi après mise en ligne).
+- Contact : formulaire (FormSubmit vers nexuslab.mpa@gmail.com) et e-mail ; réponse en général sous 24 heures. Aucun numéro de téléphone ni WhatsApp sur le site (décision de Patrick du 17.11.2026).
+- Équipe : Patrick Lugon (pilotage des projets et design, interlocuteur principal), Mehdi Chouchane (développement des sites et outils, comptes), Arno Blatter (rencontre des entreprises, suivi après mise en ligne).
 
 ## Capabilities and Constraints
 
