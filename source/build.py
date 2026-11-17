@@ -422,7 +422,7 @@ def jsonld(c):
                 "image": SITE_URL + "/assets/img/og-image.png",
                 "description": c.meta["description"],
                 "slogan": c.brand["signature"],
-                "telephone": c.brand["phone_tel"],
+                "email": c.brand["email"],
                 "areaServed": [
                     {"@type": "AdministrativeArea", "name": "Valais"},
                     {"@type": "AdministrativeArea", "name": "Suisse romande"},
@@ -731,10 +731,10 @@ def footer_faq(c):
     return (
         '<section class="footer-faq" id="faq" aria-labelledby="faq-title">'
         '<div class="ffaq-side"><h2 class="footer-title" id="faq-title">%s</h2>'
-        '<p>%s <a href="tel:%s">%s</a></p></div>'
+        '<p>%s <a href="mailto:%s">%s</a></p></div>'
         '<div class="ffaq-list">%s</div>'
         '<a class="ffaq-link" href="%s">%s %s</a></section>'
-        % (esc(c.faq["title"]), esc(c.faq["aside"]), esc(c.brand["phone_tel"]), esc(c.brand["phone_display"]), items,
+        % (esc(c.faq["title"]), esc(c.faq["aside"]), esc(c.brand["email"]), esc(c.brand["email"]), items,
            page_path(c.LANG, "faq"), esc(c.faq["link"]), ICONS["arrow"]))
 
 
@@ -743,9 +743,9 @@ def faq_body(c):
     items = "".join(
         '<details class="faq-item"><summary>%s</summary><div class="faq-body"><p>%s</p></div></details>' % (esc(q), esc(a))
         for q, a in c.faq["items"])
-    return ('<h1>%s</h1><p class="intro">%s <a href="tel:%s">%s</a></p><div class="faq-list faq-page">%s</div>'
+    return ('<h1>%s</h1><p class="intro">%s <a href="mailto:%s">%s</a></p><div class="faq-list faq-page">%s</div>'
             '<a class="btn btn-primary" href="%s">%s</a>'
-            % (esc(c.faq["title"]), esc(c.faq["aside"]), esc(c.brand["phone_tel"]), esc(c.brand["phone_display"]), items,
+            % (esc(c.faq["title"]), esc(c.faq["aside"]), esc(c.brand["email"]), esc(c.brand["email"]), items,
                page_path(c.LANG, "home"), esc(c.faq["back"])))
 
 
@@ -776,12 +776,9 @@ def build_index(c, langs, mods, templates):
         "contact_title": esc(c.contact["title"]),
         "contact_questions": contact_questions,
         "contact_no_answers": esc(c.contact["no_answers"]),
-        "contact_whatsapp": esc(c.contact["whatsapp"]),
-        "contact_call": esc(c.contact["call"]),
+        "contact_email_button": esc(c.contact["email_button"]),
         "contact_reply": esc(c.contact["reply_time"]),
-        "whatsapp_url": esc(c.brand["whatsapp"]),
-        "phone_tel": esc(c.brand["phone_tel"]),
-        "phone_display": esc(c.brand["phone_display"]),
+        "contact_email": esc(c.brand["email"]),
         "form_title": esc(c.contact["form"]["title"]),
         "form_email": esc(c.brand["form_email"]),
         "form_subject": esc(c.brand["form_subject"]),
@@ -844,9 +841,8 @@ def build_lang(lang, langs, mods, templates):
 
     thanks = (
         '<h1>%s</h1><p class="lede">%s</p>'
-        '<p><a class="btn btn-primary" href="%s">%s</a> <a class="btn btn-ghost" href="%s" rel="noopener" target="_blank">%s</a></p>'
-        % (esc(c.thanks["title"]), esc(c.thanks["text"]), page_path(lang, "home"), esc(c.thanks["back"]),
-           esc(c.brand["whatsapp"]), esc(c.contact["whatsapp"]))
+        '<p><a class="btn btn-primary" href="%s">%s</a></p>'
+        % (esc(c.thanks["title"]), esc(c.thanks["text"]), page_path(lang, "home"), esc(c.thanks["back"]))
     )
     write(page_path(lang, "thanks").lstrip("/") + "index.html",
           build_simple(c, "thanks", langs, mods, templates, thanks, c.thanks["meta_title"], "page-center", noindex=True))
