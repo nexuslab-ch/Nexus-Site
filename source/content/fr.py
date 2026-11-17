@@ -21,7 +21,7 @@ meta = {
     "title": "NexusLab, logiciels de gestion et sites web pour les indépendants de Suisse romande",
     "description": "NexusLab crée des logiciels de gestion sur mesure, des automatisations et des sites web pour les indépendants et les petites entreprises de Suisse romande. Une équipe basée en Suisse et un devis écrit avant de commencer.",
     "og_title": "NexusLab, le lien entre votre métier et le digital",
-    "og_description": "Logiciels de gestion et sites web sur mesure pour les indépendants et les petites entreprises de Suisse romande. Une offre écrite, une équipe que vous pouvez appeler.",
+    "og_description": "Logiciels de gestion et sites web sur mesure pour les indépendants et les petites entreprises de Suisse romande. Une offre écrite, une équipe qui vous répond vite.",
     "lang_label": "Français",
     "lang_short": "FR",
 }
@@ -31,9 +31,7 @@ brand = {
     "wordmark": "nexus",
     "signature": "Le lien entre votre métier et le digital.",
     "domain": "nexus-lab.ch",
-    "phone_display": "+41 79 737 87 92",
-    "phone_tel": "+41797378792",
-    "whatsapp": "https://wa.me/41797378792",
+    "email": CONTACT_EMAIL,
     "form_email": CONTACT_EMAIL,
     "form_subject": "Nouveau message depuis nexus-lab.ch",
     "form_autoresponse": "Bonjour, nous avons bien reçu votre message et nous vous répondons rapidement, en général dans les 24 heures. À bientôt, l’équipe NexusLab.",
@@ -239,7 +237,7 @@ team = {
     # elle s'affiche automatiquement en haut de la section.
     "photo_alt": "Patrick, Mehdi et Arno, l’équipe de NexusLab",
     "members": [
-        ("Patrick Lugon", "pilote les projets et s’occupe du design. C’est lui que vous aurez au téléphone.", "PL"),
+        ("Patrick Lugon", "pilote les projets et s’occupe du design. C’est votre interlocuteur principal.", "PL"),
         ("Mehdi Chouchane", "développe les sites et les outils, et tient les comptes du projet.", "MC"),
         ("Arno Blatter", "rencontre les entreprises et suit les clients après la mise en ligne.", "AB"),
     ],
@@ -297,7 +295,7 @@ proof = {
 faq = {
     "tag": "",
     "title": "Questions fréquentes",
-    "aside": "Une autre question? Appelez-nous, c’est souvent plus rapide.",
+    "aside": "Une autre question? Écrivez-nous, on vous répond en général dans les 24 heures.",
     "link": "Voir les questions fréquentes",
     "back": "Retour à l’accueil",
     "meta_description": "Prix, délais, paiement au mois, modifications : les réponses aux questions qu’on nous pose le plus souvent.",
@@ -326,8 +324,7 @@ contact = {
         "Qui s’occupera de mettre le contenu à jour?",
     ],
     "no_answers": "Pas besoin d’avoir déjà les réponses : on en parle ensemble, puis vous recevez un devis écrit.",
-    "whatsapp": "Écrire sur WhatsApp",
-    "call": "Appeler",
+    "email_button": "Écrire un e-mail",
     "reply_time": "On vous répond en général dans les 24 heures.",
     "form": {
         "title": "Ou décrivez votre projet ici",
@@ -360,7 +357,7 @@ footer = {
 
 thanks = {
     "title": "Merci, votre message est bien parti.",
-    "text": "On vous répond en général dans les 24 heures. En attendant, vous pouvez aussi nous écrire sur WhatsApp.",
+    "text": "On vous répond en général dans les 24 heures, par e-mail.",
     "back": "Retour au site",
     "meta_title": "Message envoyé",
 }
@@ -381,7 +378,7 @@ legal = {
         ("Éditeur du site",
          "<p>NexusLab<br>Projet de Vardena, coopérative en cours de constitution, Team Company de la Business Team Academy, HES-SO Valais-Wallis</p>"
          "<p>c/o HES-SO Valais-Wallis, Business Team Academy<br>Route de Sous-Géronde 87<br>3960 Sierre<br>Suisse</p>"
-         "<p>Téléphone : <a href=\"tel:+41797378792\">+41 79 737 87 92</a><br>E-mail : <a href=\"mailto:" + CONTACT_EMAIL + "\">" + CONTACT_EMAIL + "</a></p>"
+         "<p>E-mail : <a href=\"mailto:" + CONTACT_EMAIL + "\">" + CONTACT_EMAIL + "</a></p>"
          "<p>Responsables du contenu : Patrick Lugon, Mehdi Chouchane et Arno Blatter.</p>"
          "<p>Vardena sera inscrite au registre du commerce du canton du Valais lors de sa constitution. Son numéro d’identification des entreprises (IDE) figurera ici dès qu’il sera attribué. D’ici là, aucun contrat n’est conclu au nom de NexusLab sans une offre écrite.</p>"),
         ("Hébergement",
@@ -404,15 +401,13 @@ privacy = {
     "intro": "<p>Cette page explique quelles données sont traitées quand vous visitez nexus-lab.ch, et pourquoi. Elle s’appuie sur la loi fédérale sur la protection des données (LPD), en vigueur depuis le 1er septembre 2023. En résumé : ce site ne vous suit pas, et les seules données que nous recevons sont celles que vous nous envoyez.</p>",
     "sections": [
         ("Responsable du traitement",
-         "<p>NexusLab, projet de Vardena, coopérative en cours de constitution, Team Company de la Business Team Academy, HES-SO Valais-Wallis. Adresse : c/o HES-SO Valais-Wallis, Business Team Academy, Route de Sous-Géronde 87, 3960 Sierre. Contact : <a href=\"tel:+41797378792\">+41 79 737 87 92</a>, <a href=\"mailto:" + CONTACT_EMAIL + "\">" + CONTACT_EMAIL + "</a>.</p>"),
+         "<p>NexusLab, projet de Vardena, coopérative en cours de constitution, Team Company de la Business Team Academy, HES-SO Valais-Wallis. Adresse : c/o HES-SO Valais-Wallis, Business Team Academy, Route de Sous-Géronde 87, 3960 Sierre. Contact : <a href=\"mailto:" + CONTACT_EMAIL + "\">" + CONTACT_EMAIL + "</a>.</p>"),
         ("Aucun suivi, aucun cookie",
          "<p>Ce site n’utilise ni cookies, ni Google Analytics, ni aucun autre outil de mesure d’audience ou de publicité. Nous ne déposons rien sur votre appareil et nous ne suivons pas votre navigation. C’est pourquoi vous ne voyez pas de bandeau de cookies.</p>"),
         ("Hébergement et journaux techniques",
          "<p>Le site est hébergé par Netlify, Inc., San Francisco, États-Unis. Comme tout hébergeur, Netlify peut enregistrer des journaux techniques (adresse IP, type de navigateur, pages demandées, heure de la visite) pour assurer la sécurité et le bon fonctionnement du service, pendant une durée limitée. Ces données peuvent être traitées hors de Suisse. Les règles de Netlify sont décrites dans sa <a href=\"https://www.netlify.com/privacy/\" rel=\"noopener\" target=\"_blank\">politique de confidentialité</a>.</p>"),
         ("Formulaire de contact",
          "<p>Quand vous utilisez le formulaire, les données que vous saisissez (nom, entreprise, e-mail, téléphone, message) nous sont transmises par e-mail via le service FormSubmit (formsubmit.co). FormSubmit est un service externe : il reçoit vos données et nous les fait suivre par e-mail. Le message arrive ensuite dans notre boîte Gmail (Google). Ces deux prestataires peuvent traiter les données hors de Suisse, notamment aux États-Unis. Nous utilisons vos données uniquement pour vous répondre et, si vous le souhaitez, pour préparer une offre. Elles ne sont ni vendues ni transmises à d’autres tiers. Nous les conservons le temps de nos échanges, puis au plus douze mois après le dernier contact.</p>"),
-        ("WhatsApp et téléphone",
-         "<p>Si vous nous écrivez sur WhatsApp, les règles de confidentialité de WhatsApp (Meta) s’appliquent à cet échange. Nous ne conservons vos coordonnées que pour le suivi de votre demande.</p>"),
         ("Polices de caractères et contenus externes",
          "<p>La police Manrope est hébergée sur nos propres serveurs : aucune requête n’est envoyée à Google Fonts. Ce site ne charge aucun contenu provenant de réseaux sociaux. Les liens vers les sites de nos clients mènent à des sites indépendants, soumis à leurs propres règles.</p>"),
         ("Vos droits",
